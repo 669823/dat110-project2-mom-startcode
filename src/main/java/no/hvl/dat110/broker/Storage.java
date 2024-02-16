@@ -80,8 +80,6 @@ public class Storage {
 
 		subscriptions.remove(topic);
 
-		
-		
 	}
 
 	public void addSubscriber(String user, String topic) {
