@@ -89,9 +89,9 @@ public class Storage {
 		Set<String> subscribers = subscriptions.get(topic);
 		if (subscribers == null){
 			subscribers = ConcurrentHashMap.newKeySet();
-			subscribers.add(user); // Fix: legg til brukeren i subscribers
-			subscriptions.put(topic, subscribers); // Fix: oppdater subscriptions
+			subscriptions.put(topic, subscribers);
 		}
+		subscribers.add(user);
 	}
 
 	public void removeSubscriber(String user, String topic) {
