@@ -139,18 +139,13 @@ public class Dispatcher extends Stopable {
 	}
 
 	public void onPublish(PublishMsg msg) {
-		String message = msg.getMessage();
-		String topic = msg.getTopic();
-		String usr = msg.getUser();
 		Logger.log("onPublish: " + msg.toString());
-		Set<String> subscribers = storage.getSubscribers(topic);
-		for (String user : subscribers) {
-			ClientSession client = storage.getSession(user);
-			if (client != null) {
-				PublishMsg publish = new PublishMsg(usr, topic, message);
-				client.send(publish);
-			}
-		}
-        
+        Set<String> subscribers = storage.getSubscribers(msg.getTopic());
+        for (String user : subscribers) {
+            ClientSession client = storage.getSession(user);
+            if (client != null) {
+                client.send(msg);
+            }
+	}
 	}
 }
